@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khám Phá Lâm Hà - Sắc Màu Đà Lạt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Palette màu Đà Lạt: Xanh lá thông và Xanh dương sương mù */
+            --bg-dark: #061a1a; /* Xanh lá cực tối */
+            --accent-green: #2d5a27; /* Xanh lá thông */
+            --accent-blue: #2a5298; /* Xanh dương sâu */
+            --gradient-dalat: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #2d5a27 100%);
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Nền Gradient mượt mà kiểu sương mù Đà Lạt */
+        .mist-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 0% 0%, #1e3c72 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, #2d5a27 0%, transparent 50%);
+            opacity: 0.4;
+        }
+
+        .glow {
+            position: absolute;
+            width: 400px; height: 400px;
+            background: var(--accent-green);
+            filter: blur(180px);
+            border-radius: 50%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* Typography */
+        h1, h2, h3 { font-family: 'Playfair Display', serif; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-green); border-radius: 10px; }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .rotate-in { transform: rotate(-3deg) scale(0.95); opacity: 0; transition: all 0.8s ease; }
+        .rotate-in.active { transform: rotate(0) scale(1); opacity: 1; }
+
+        /* Card Style */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover { 
+            background: rgba(255, 255, 255, 0.08); 
+            border-color: var(--accent-green);
+            transform: translateY(-5px);
+        }
+
+        /* Gallery */
+        .gallery-item { overflow: hidden; border-radius: 12px; height: 300px; position: relative; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.05); }
+
+        /* Overlay */
+        #page-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #020b0b; z-index: 100; display: none;
+            overflow-y: auto; padding: 60px 20px;
+        }
+        .close-btn { position: fixed; top: 20px; right: 30px; font-size: 35px; cursor: pointer; z-index: 101; color: #fff; }
+    </style>
+</head>
+<body>
+
+    <div class="mist-bg"></div>
+    <div class="glow" style="top: -10%; left: -10%;"></div>
+    <div class="glow" style="bottom: 0; right: 0; background: var(--accent-blue);"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 px-8 py-5 flex justify-between items-center bg-black/20 backdrop-blur-md border-b border-white/5">
+        <div class="text-2xl font-bold tracking-tighter bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">LAM HA DISCOVERY</div>
+        <div class="hidden md:flex space-x-10 text-xs uppercase font-bold tracking-widest">
+            <a href="#home" class="hover:text-green-400 transition">Khởi hành</a>
+            <a href="#locations" class="hover:text-green-400 transition">Điểm đến</a>
+            <a href="#inspiration" class="hover:text-green-400 transition">Cảm hứng</a>
+            <a href="#contact" class="hover:text-green-400 transition">Liên hệ</a>
+        </div>
+        <button class="bg-gradient-to-r from-blue-600 to-green-600 px-7 py-2 rounded-full text-xs font-black uppercase shadow-lg shadow-green-900/20 hover:scale-105 transition">LIÊN HỆ NGAY</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20">
+        <h2 class="text-lg text-green-400 font-bold mb-4 reveal tracking-[0.3em]">MỘT THOÁNG HÀ NỘI TRÊN CAO NGUYÊN</h2>
+        <h1 class="text-6xl md:text-9xl mb-8 reveal font-black" style="transition-delay: 0.2s">LÂM HÀ</h1>
+        <p class="max-w-3xl text-gray-300 text-lg leading-relaxed font-light reveal" style="transition-delay: 0.4s">
+            Nơi những đồi chè xanh ngát quyện cùng sương mù sớm mai. Một Lâm Hà bình yên, hoang sơ và đầy chất thơ đang chờ bước chân bạn khám phá.
+        </p>
+        <div class="mt-12 flex flex-col md:flex-row gap-6 reveal" style="transition-delay: 0.6s">
+            <a href="#locations" class="bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-green-500 hover:text-white transition">BẮT ĐẦU HÀNH TRÌNH</a>
+            <a href="#inspiration" class="border border-white/30 px-10 py-4 rounded-full font-bold hover:bg-white/10 transition">TÌM HIỂU THÊM</a>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="locations" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
+            <div>
+                <h2 class="text-4xl font-black mb-4">Điểm đến <span class="text-green-500">Kỳ vĩ</span></h2>
+                <p class="text-gray-400">Khám phá những dấu ấn thiên nhiên tuyệt đẹp tại Lâm Hà</p>
+            </div>
+            <div class="text-sm text-green-400 font-bold hidden md:block">TRẢI NGHIỆM KHÁC BIỆT &rarr;</div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Thác Voi -->
+            <div class="rotate-in cursor-pointer group" onclick="showDetail('thacvoi')">
+                <div class="relative overflow-hidden rounded-2xl h-[500px] border border-white/10">
+                    <img src="https://cdn3.ivivu.com/2019/07/thac-voi-da-lat-ivivu-5.jpg" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Thác Voi">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <span class="text-xs font-bold text-green-400 bg-green-400/10 px-3 py-1 rounded-full">THIÊN NHIÊN</span>
+                        <h3 class="text-3xl mt-4">THÁC VOI</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Chùa Linh Ẩn -->
+            <div class="rotate-in cursor-pointer group" style="transition-delay: 0.2s" onclick="showDetail('chualinhan')">
+                <div class="relative overflow-hidden rounded-2xl h-[500px] border border-white/10">
+                    <img src="https://zoomtravel.vn/upload/images/chua-linh-an-an-giang-11-min.jpeg" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Chùa Linh Ẩn">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <span class="text-xs font-bold text-blue-400 bg-blue-400/10 px-3 py-1 rounded-full">TÂM LINH</span>
+                        <h3 class="text-3xl mt-4">CHÙA LINH ẨN</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- Đèo Tân Thanh -->
+            <div class="rotate-in cursor-pointer group" style="transition-delay: 0.4s" onclick="showDetail('deotanthanh')">
+                <div class="relative overflow-hidden rounded-2xl h-[500px] border border-white/10">
+                    <img src="https://meetup.vn/wp-content/uploads/2025/06/canh-sac-deo-tan-thanh-thung-lung-suong-mu-684958.jpg" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="Săn Mây">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <span class="text-xs font-bold text-yellow-400 bg-yellow-400/10 px-3 py-1 rounded-full">TRẢI NGHIỆM</span>
+                        <h3 class="text-3xl mt-4">SĂN MÂY</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inspiration Section (Thay thế cho bảng giá) -->
+    <section id="inspiration" class="py-32 bg-white/5 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+                <div class="space-y-8 reveal">
+                    <h2 class="text-5xl font-black leading-tight text-white">CẢM HỨNG TỪ <br><span class="text-green-500">CAO NGUYÊN</span></h2>
+                    <p class="text-gray-400 text-lg">Lâm Hà không chỉ là một chuyến đi, đó là sự tái kết nối với thiên nhiên. Từ tiếng thác đổ Liêng Rơwoa hùng vĩ đến không gian tĩnh mịch của rừng thông xanh, mỗi khoảnh khắc đều là một liều thuốc cho tâm hồn.</p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="glass-card p-6">
+                            <h4 class="text-3xl font-bold text-green-400">1000m</h4>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest mt-2">Độ cao trung bình</p>
+                        </div>
+                        <div class="glass-card p-6">
+                            <h4 class="text-3xl font-bold text-blue-400">20°C</h4>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest mt-2">Nhiệt độ lý tưởng</p>
+                        </div>
+                    </div>
+                    <button class="bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-blue-500 hover:text-white transition" onclick="showDetail('food')">KHÁM PHÁ ĐẶC SẢN</button>
+                </div>
+                <div class="grid grid-cols-2 gap-4 reveal" style="transition-delay: 0.3s">
+                    <img src="https://images2.thanhnien.vn/528068263637045248/2024/8/24/1-1724506839960698990885.jpg" class="rounded-2xl w-full h-64 object-cover mt-12 shadow-2xl" alt="Lâm Hà 1">
+                    <img src="https://datnenlamdong.com.vn/uploads/baiviet/check-in-lam-ha/1-diem-check-in-lam-ha.jpeg" class="rounded-2xl w-full h-64 object-cover shadow-2xl" alt="Lâm Hà 2">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="py-32 px-6">
+        <h2 class="text-center text-4xl font-black mb-20 reveal">KHOẢNH KHẮC <span class="text-blue-500">LÂM HÀ</span></h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <div class="gallery-item reveal shadow-xl"><img src="https://cdn.tgdd.vn/Files/2023/10/12/1551481/kham-pha-du-lich-lam-ha-lam-dong-voi-5-dia-diem-hut-khach-202310120035350653.jpg" alt="1"></div>
+            <div class="gallery-item reveal shadow-xl" style="transition-delay: 0.1s"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Th%C3%A1c_Voi.jpg" alt="2"></div>
+            <div class="gallery-item reveal shadow-xl" style="transition-delay: 0.2s"><img src="https://nld.mediacdn.vn/zoom/594_371/291774122806476800/2025/1/6/lam-dong-lam-ha-1732335370670587-17361563188961454121905-0-0-394-630-crop-17361563854131512828663.jpg" alt="3"></div>
+            <div class="gallery-item reveal shadow-xl" style="transition-delay: 0.3s"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB-tF_sKKFy05RwvN2iSnLfsUcYzUBu326nA&s" alt="4"></div>
+        </div>
+    </section>
+
+    <!-- Footer & Contact -->
+    <footer id="contact" class="py-20 px-6 border-t border-white/5 bg-black/40">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="text-center md:text-left">
+                <h3 class="text-3xl font-black mb-2">LAM HA <span class="text-green-500">TRAVEL</span></h3>
+                <p class="text-gray-500">Kiến tạo hành trình, kết nối tâm hồn.</p>
+            </div>
+            
+            <div class="flex flex-col items-center md:items-end space-y-4">
+                <h4 class="text-xs font-black uppercase tracking-[0.4em] text-gray-400">Thông tin liên hệ</h4>
+                <div class="flex items-center space-x-4 glass-card px-6 py-4">
+                    <img src="https://scontent.fdli1-1.fna.fbcdn.net/v/t39.30808-6/651651341_2770296449971623_7937777215672870678_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=sQsfB020Bi0Q7kNvwGvxX7Q&_nc_oc=Adrx9HTgVKMZb2JoD4_rjSZmNIwe_CUX1tN7qM2IZvUjVDo6mSCxIrIN3IFoGCtbx_U&_nc_zt=23&_nc_ht=scontent.fdli1-1.fna&_nc_gid=-mfkThx25uHRi9TLWPhLmg&_nc_ss=7a389&oh=00_Af1Q72uOpmwKBnMzVHNh2F19noECnR7OS-6-VAlWlI2fWg&oe=69E4CC0A" class="w-12 h-12 rounded-full border-2 border-green-500" alt="Admin">
+                    <div>
+                        <p class="font-bold text-white">NGUYỄN GIA KHIÊM</p>
+                        <a href="mailto:nguyengiakhiem456@gmail.com" class="text-sm text-green-400 hover:underline">nguyengiakhiem456@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-20 text-center text-xs text-gray-600 uppercase tracking-widest">
+            &copy; 2024 Du Lịch Lâm Hà. Developed with passion for Highlands.
+        </div>
+    </footer>
+
+    <!-- Overlay Details -->
+    <div id="page-overlay">
+        <span class="close-btn" onclick="hideDetail()">&times;</span>
+        <div id="overlay-content" class="max-w-5xl mx-auto">
+            <!-- JS Content -->
+        </div>
+    </div>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal, .rotate-in");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.onload = reveal;
+
+        const details = {
+            thacvoi: {
+                title: "Thác Voi - Bản Hùng Ca Của Đá",
+                animation: "slide-up",
+                images: [
+                    "https://bazantravel.com/cdn/medias/uploads/51/51261-thac-voi-700x466.jpg",
+                    "https://datnenlamdong.com.vn/uploads/baiviet/khu-du-lich-thac-voi-da-lat/thac-voi-lam-dong-viet-nam.jpg",
+                    "https://cdn3.ivivu.com/2019/07/thac-voi-da-lat-ivivu-3.jpg"
+                ],
+                content: "Thác Voi nằm tại thị trấn Nam Ban, là một trong những thác nước lớn nhất Việt Nam. Những tảng đá lớn tựa như đàn voi quỳ bên dòng chảy xiết tạo nên vẻ đẹp hoang dại và mạnh mẽ."
+            },
+            chualinhan: {
+                title: "Chùa Linh Ẩn - Nơi Hội Tụ Linh Khí",
+                animation: "zoom-in",
+                images: [
+                    "https://static.vinwonders.com/production/chua-linh-an-8.jpg",
+                    "https://mia.vn/media/uploads/blog-du-lich/Chua-linh-an-n%C6%A1i-an-toa-cua-tuong-quan-am-lon-nhat-da-lat-08-1634611831.jpg",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSysveVxDDoWMItwfGsVJm4EsEPdbmx7xz4g&s"
+                ],
+                content: "Với bức tượng Quan Thế Âm cao nhất Việt Nam nhìn xuống thung lũng, Chùa Linh Ẩn mang lại cảm giác bình an lạ kỳ. Tiếng chuông chùa hòa cùng tiếng thác tạo nên bản nhạc tâm linh thuần khiết."
+            },
+            deotanthanh: {
+                title: "Săn Mây Đèo Tân Thanh",
+                animation: "fade-in",
+                images: [
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwrt-4oN9PO7wNSJoK9QKxdGqwFI6tQ_Dk_Q&s",
+                    "https://meetup.vn/wp-content/uploads/2025/06/deo-tan-thanh-dt725-lam-ha-lam-dong-toan-canh-684958.jpg",
+                    "https://storage.googleapis.com/blogvxr-uploads/2025/12/f9c63e9b-deo-tan-thanh-4194682-9473236-8549670.jpg"
+                ],
+                content: "Đỉnh đèo Tân Thanh là tọa độ săn mây không thể bỏ qua. Những biển mây bồng bềnh tràn qua những đồi cafe vào sáng sớm sẽ là ký ức không bao giờ quên."
+            },
+            food: {
+                title: "Hương Vị Núi Rừng Lâm Hà",
+                animation: "rotate-scale",
+                images: [
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-9AdrOkPa5CzB_G-DoxPHaqigQdlViNa-uA&s",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv6bBT54abcIdvGZhNvhBVPppclLA4k-ADiQ&s",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT328yvl8-LnajuGMKtOIujjPwYUpfgggDWCA&s"
+                ],
+                content: "Thưởng thức Gà nướng cơm lam bên bếp lửa hồng, nếm vị bùi của dế chiên giòn và tráng miệng với chuối Laba nổi tiếng - món quà quý báu từ mảnh đất kinh tế mới."
+            }
+        };
+
+        function showDetail(key) {
+            const data = details[key];
+            const overlay = document.getElementById('page-overlay');
+            const content = document.getElementById('overlay-content');
+            
+            content.innerHTML = `
+                <div class="animate-in" style="opacity: 0; transform: translateY(50px); transition: all 0.8s ease">
+                    <h1 class="text-5xl font-black mb-12 text-green-400">${data.title}</h1>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                        ${data.images.map(img => `<img src="${img}" class="rounded-3xl h-[400px] w-full object-cover shadow-2xl hover:scale-[1.02] transition">`).join('')}
+                    </div>
+                    <div class="glass-card p-12 text-xl leading-loose text-gray-300">
+                        ${data.content}
+                    </div>
+                </div>
+            `;
+
+            overlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                const inner = content.querySelector('.animate-in');
+                inner.style.opacity = '1';
+                inner.style.transform = 'translateY(0)';
+            }, 100);
+        }
+
+        function hideDetail() {
+            document.getElementById('page-overlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
